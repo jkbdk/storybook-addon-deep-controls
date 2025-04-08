@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type {BaseAnnotations, Parameters as ImportToKeep} from "@storybook/types";
+import type {BaseAnnotations, Parameters as ImportToKeep, StrictInputType} from "@storybook/types";
 
 type DummyTypeToShowImportAsUsed = ImportToKeep; // need this to keep the Parameters import to allow the declaration merge below to work
 
@@ -24,8 +24,10 @@ type DeepControlsAddonParameters = {
   enabled?: boolean;
 };
 
+type RemappedOmit<T, K extends PropertyKey> = { [P in keyof T as Exclude<P, K>]: T[P] }
+
 /** @internal */
-export type PartialStrictInputType = Omit<Partial<StrictInputType>, "type"> & {
+export type PartialStrictInputType = RemappedOmit<Partial<StrictInputType>, "type"> & {
   type?: Partial<StrictInputType["type"]>;
 };
 
