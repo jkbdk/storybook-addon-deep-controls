@@ -148,3 +148,5 @@ dist
 **/playwright-report/
 **/playwright/.cache/
 **/.last-run.json
+
+.vscode
